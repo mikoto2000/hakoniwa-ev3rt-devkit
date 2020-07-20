@@ -1,0 +1,23 @@
+version: '3'
+services:
+  ev3rt:
+    image: mikoto2000/hakoniwa-ev3rt-devkit:latest
+    build:
+      context: ./dockerfile
+      dockerfile: Dockerfile
+    working_dir: /ev3rt-athrill-v850e2m/sdk/workspace
+    restart: "no"
+    command: "make img=app && make img=app start"
+    volumes:
+      - "${EV3RT_APP_DIR}:/ev3rt-athrill-v850e2m/sdk/workspace/app"
+    ports:
+      - "54002:54002/udp"
+    networks:
+      hakoniwa_single_robot_net:
+        ipv4_address: 172.30.238.2
+networks:
+  hakoniwa_single_robot_net:
+    ipam:
+      config:
+        - subnet: 172.30.238.0/24
+
