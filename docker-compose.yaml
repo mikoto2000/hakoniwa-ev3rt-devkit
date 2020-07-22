@@ -12,12 +12,4 @@ services:
       - "${EV3RT_APP_DIR}:/ev3rt-athrill-v850e2m/sdk/workspace/app"
     ports:
       - "54002:54002/udp"
-    networks:
-      hakoniwa_single_robot_net:
-        ipv4_address: 172.30.238.2
-networks:
-  hakoniwa_single_robot_net:
-    ipam:
-      config:
-        - subnet: 172.30.238.0/24
 
