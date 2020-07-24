@@ -95,6 +95,8 @@ COPY --from=runtime-build-env \
     /athrill/apl/include/athrill_syscall.h
 
 COPY ./entrypoint.sh /entrypoint.sh
+COPY ./codelist.awk /usr/local/bin/codelist.awk
+COPY ./geany.sh /usr/local/bin/geany.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 
