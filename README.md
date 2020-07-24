@@ -76,42 +76,37 @@ docker-compose run --rm --service-ports ev3rt
 
 #### ビルドとシミュレータ起動を別々に実行
 
-差分ビルドが必要であればこの方法。
+差分ビルドが必要であれば、直接コンテナに `bash` で接続も可能。
 
 
-##### 開発環境コンテナ起動
+##### 開発環境コンテナ実行
 
 ```sh
-docker-compose up -d
+docker-compose run --rm --service-ports ev3rt bash
 ```
 
 ##### アプリケーションビルド
 
+`/ev3rt-athrill-v850e2m/sdk/workspace` 内で以下コマンドを実行。
+
 ```sh
-docker-compose exec ev3rt make img=app
+make img=app
 ```
 
 ※ アプリケーションはコンテナに `app` という名前でマウントしているため、 `img=app` の名前を変更する必要はない(`docker-compose.yaml` にて設定)
 
 ##### エミュレータ実行
 
+`/ev3rt-athrill-v850e2m/sdk/workspace` 内で以下コマンドを実行。
+
 ```sh
-docker-compose exec ev3rt make img=app start
+make img=app start
 ```
 
 必要であれば直接 `athrill2` コマンドを実行することで、起動方法や設定を変更できる。
 ([athrill の起動 - 単体ロボット向けシミュレータ使用手順(V850版)](https://toppers.github.io/hakoniwa/single-robot-usage/01_usage_v850/#athrill%E3%81%AE%E8%B5%B7%E5%8B%95) を参照)
 
-
 ※ アプリケーションはコンテナに `app` という名前でマウントしているため、 `img=app` の名前を変更する必要はない(`docker-compose.yaml` にて設定)
-
-
-
-##### 開発環境コンテナ終了
-
-```sh
-docker-compose down
-```
 
 
 ### バイナリの取得
@@ -123,4 +118,8 @@ docker-compose down
 ```sh
 docker cp e74a3ba2e7d0:/ev3rt-athrill-v850e2m/sdk/workspace/asp ./asp
 ```
+
+### デバッグ方法
+
+TODO
 
